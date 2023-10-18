@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- start -->
+    <!-- Registration -->
+    <div class="container text-white">
+        <div class="container border p-4 my-5 form-con rounded-3" >
+
+            <h4 class="header text-center">Registration</h4>
+            <form action="login.html" class="form" onsubmit="return validate()">
+                <div class="name mt-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input id="name" name="Name" type="text" placeholder="Enter your name" class="form-control">
+                </div>
+                <div class="emailId mt-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input id="email" name="Email" type="text" placeholder="Enter your email Id" class="form-control">
+                </div>
+                <div class="phone mt-3">
+                    <label for= "phone" class="form-label">Phone number</label>
+                    <input id= "phone" name="phone" type="text" placeholder="Enter your phone" class="form-control">
+                </div>
+                <div class="password mt-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" name="Password" type="password"  placeholder="password" class="form-control">
+                </div>
+                <div class="confirmPwd mt-3">
+                    <label for="confirmPwd" class="form-label">Confirm password</label>
+                    <input id="confirmPwd" name="confirmPwd"  class="form-control" type="password" placeholder="confirm password">
+                </div>
+                <input type="submit" class="form-control btn mt-4 fw-bolder btn-outline-light">
+                <a class="btn form-control mt-1 fw-bolder btn-outline-light" href="login.html">Login</a>
+            </form>
+        </div>
+
+    </div>
+    <!-- End -->
+
+    <!-- script -->
+    <script>
+         
+        let userNameElement = document.querySelector("#name");
+        let userEmailElement = document.querySelector("#email");
+        let userPhoneNumberElement = document.querySelector("#phone");
+        let userPasswordElement = document.querySelector("#password");
+        let userConfirmPasswordElement = document.querySelector("#confirmPwd");
+        
+
+        let userDetails = {
+            userName:"",
+            userPhoneNumber:"",
+            userEmail:"",
+            userPassword:"",
+            userConfirmPassword:"",
+        };
+
+        let userDetailsArray = JSON.parse(localStorage.getItem("userDetails"))||[];
+
+
+        function validate(){
+
+            let userNameElementValue = userNameElement.value.trim();
+            let userEmailElementValue = userEmailElement.value.trim();
+            let userPhoneNumberElementValue = userPhoneNumberElement.value.trim();
+            let userPasswordElementValue = userPasswordElement.value.trim();
+            let userConfirmPasswordElementValue = userConfirmPasswordElement.value.trim();
+            let nameRegPattern = /^[A-Za-z]*$/;
+            let emailRegPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let numberRegPattern = /^[0-9]*$/;
+            let captialPattern = /[A-Z]/;
+            let specialCharactersPattern = /[$%^&*#%!]/;
+            let minLengthOfPassword = /.{8,}/;
+            let passwordNumberReg = /[0-9]/;
+
+            userDetails = new Object;
+            userDetails.userName = userNameElementValue;
+            userDetails.userPhoneNumber = userPhoneNumberElementValue;
+            userDetails.userConfirmPassword = userConfirmPasswordElementValue;
+            userDetails.userEmail = userEmailElementValue;
+            userDetails.userPassword = userPasswordElementValue;
+
+            userDetailsArray.push(userDetails);
+            console.log(userDetailsArray)
+            localStorage.setItem("userDetails",JSON.stringify(userDetailsArray))
+
+
+            console.log(nameRegPattern.test(userNameElementValue))
+
+            if( userNameElementValue ===""|| userEmailElementValue ===""||  userPhoneNumberElementValue ==="" || userPasswordElementValue ==="" || userConfirmPasswordElementValue ===""){
+
+                alert("Please fill all the fields")
+                Errors()
+                return false;
+
+            }else if ( userNameElementValue.length<3 || nameRegPattern.test(userNameElementValue)===false){
+
+                alert("Please enter valid name")
+                return false;
+
+            }else if(emailRegPattern.test(userEmailElementValue)===false){
+                
+                alert("Please enter valid EmailId");
+                return false;
+
+            }else if(numberRegPattern.test(userPhoneNumberElementValue)===false){
+
+                alert("Please enter your number");
+                return false;
+
+            }else if(captialPattern.test(userPasswordElementValue)===false){
+
+                alert("Password should contain atleast one capital letter");
+                return false;    
+
+            }else if (specialCharactersPattern.test(userPasswordElementValue)===false) {
+
+                alert("Password should contain atleast one special character");
+                return false;    
+
+            }else if (passwordNumberReg.test(userPasswordElementValue)===false){
+                       
+                alert("Password should contain atleast one number");
+                return false;
+
+            }else if (minLengthOfPassword.test(userPasswordElementValue)===false){
+                       
+                alert("Password should contain 8 character");
+                return false;
+
+            }else if (userPasswordElementValue !==userConfirmPasswordElementValue){
+                       
+                alert("password value is not matched with confirmed password value");
+                return false;
+
+            }else{
+
+                return true;
+
+            };
+            
+        };
+
+    </script>
+
+</body>
+</html>

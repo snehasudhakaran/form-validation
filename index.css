@@ -1,0 +1,53 @@
+/* common styling */
+@media only screen and (min-device-width:600px) and (max-device-width:770px){
+    .form-con{
+        width:70%;
+    }
+}
+@media only screen and (min-device-width:771px) and (max-device-width:1000px){
+    .form-con{
+        width:50%;
+    }
+}
+@media only screen and (min-width:1001px){
+    .form-con{
+        width:35%;
+    }
+}
+
+input:focus, button:focus, a:focus{
+    box-shadow: none !important;
+}
+
+body{
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+
+.form-con{
+    background: linear-gradient( rgb(246, 240, 240,0.2),rgb(255, 255, 255,0.2),rgb(255, 255, 255,0.2),rgb(255, 255, 255,0.2),rgb(255, 255, 255,0.2),rgb(255, 255, 255,0.1));
+}
+
+/* registration page styles */
+
+/* input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{
+    appearance: none;
+} */
+
+/* input[type="submit"], input[type="button"]{
+    color:#182848 ;
+} */
+
+/* To-Do List styles */
+
+.task{
+    display:none;
+}
+
+ul{
+    background-color: white;
+    padding:5px;
+    color:black;
+    display:flex;
+    justify-content: space-between;
+}
+
